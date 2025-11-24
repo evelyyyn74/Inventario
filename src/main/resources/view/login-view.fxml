@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.datamonkey.controller.LoginController">
+
+    <children>
+        <HBox prefHeight="600" prefWidth="1000">
+           <children>
+   
+               <!-- ================= LADO IZQUIERDO ================= -->
+               <VBox alignment="TOP_LEFT" prefWidth="600" spacing="15">
+                   <padding>
+                       <Insets bottom="50" left="80" right="80" top="50" />
+                   </padding>
+      <children>
+      
+                      <!-- Bienvenido -->
+                      <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Bienvenido a StockMon" />
+      
+                      <Region prefHeight="20" />
+      
+                      <!-- Icono (lo puedes cambiar luego) -->
+                      <StackPane alignment="CENTER">
+                          <children>
+                              <Label style="-fx-font-size: 48px;" text="👤" />
+                          </children>
+                      </StackPane>
+      
+                      <!-- Título de login -->
+                      <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Iniciar Sesión" />
+      
+                      <Label style="-fx-text-fill: #666666; -fx-font-size: 14px;" text="Accede a tu cuenta para continuar" />
+      
+                      <Region prefHeight="10" />
+      
+                      <!-- ================= USUARIO ================= -->
+                      <Label style="-fx-font-size: 14px;" text="Usuario" />
+                      <TextField fx:id="txtUsuario" prefHeight="40" promptText="Usuario123" style="-fx-background-radius: 10; -fx-border-radius: 10;" />
+      
+                      <!-- ================= CONTRASEÑA ================= -->
+                      <Label style="-fx-font-size: 14px;" text="Contraseña" />
+                      <PasswordField fx:id="txtContrasena" prefHeight="40" promptText="********" style="-fx-background-radius: 10; -fx-border-radius: 10;" />
+      
+                      <!-- Recordarme + Olvidaste contraseña -->
+                      <HBox alignment="CENTER_LEFT" spacing="10">
+                          <children>
+                              <CheckBox fx:id="chkRecordarme" text="Recordarme" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Hyperlink fx:id="linkOlvidasteContrasena" onAction="#onOlvidasteContrasena" text="¿Olvidaste tu contraseña?" />
+                          </children>
+                      </HBox>
+      
+                      <!-- BOTÓN INICIAR SESIÓN -->
+                      <Button fx:id="btnIniciarSesion" maxWidth="Infinity" onAction="#onIniciarSesion" prefHeight="45" style="                             -fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2);                             -fx-background-radius: 20;                             -fx-text-fill: white;                             -fx-font-size: 16px;                         " text="Iniciar Sesión" />
+      
+                      <!-- Registrarse -->
+                      <HBox alignment="CENTER">
+                          <children>
+                              <Label style="-fx-font-size: 13px;" text="¿No tienes una cuenta?" />
+                              <Hyperlink fx:id="linkRegistrate" onAction="#onRegistrate" text=" Regístrate aquí" />
+                          </children>
+                      </HBox>
+      </children>
+   
+               </VBox>
+   
+               <!-- ================= LADO DERECHO (IMAGEN) ================= -->
+               <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="601.0" prefWidth="423.0">
+               <children>
+                       <ImageView fx:id="imgFondo" fitHeight="596.0" fitWidth="430.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/montana.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               </StackPane>
+           </children>
+
+        </HBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,23 @@
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-effect: none;
+    -fx-padding: 10 15;
+}
+
+.sidebar-button {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #3b4a52;
+}
+
+.sidebar-button-active {
+    -fx-background-color: #1abc9c;
+    -fx-font-weight: bold;
+}

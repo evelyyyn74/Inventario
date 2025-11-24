@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/18.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.DashboardController"
+            fx:id="mainPane"
+            prefWidth="1200" prefHeight="700">
+
+    <!-- ====================== SIDEBAR ====================== -->
+    <left>
+        <VBox prefWidth="260" style="-fx-background-color: #2f3e46;">
+            <children>
+
+                <!-- Perfil -->
+                <VBox alignment="CENTER" spacing="10">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <children>
+                        <ImageView fitWidth="80" fitHeight="80" preserveRatio="true" />
+                        <Label text="Alan Emir Vargas"
+                               style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </children>
+                </VBox>
+
+                <Separator/>
+
+                <!-- Menú -->
+                <VBox spacing="8">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+
+                    <children>
+
+                        <Button fx:id="btnInicio" text="Inicio" onAction="#mostrarInicio"
+                                maxWidth="Infinity"
+                                styleClass="sidebar-button"
+                        />
+
+                        <Button fx:id="btnProductos" text="Productos" onAction="#mostrarProductos"
+                                maxWidth="Infinity"
+                                styleClass="sidebar-button"/>
+
+                        <Button fx:id="btnInventario" text="Inventario" onAction="#mostrarInventario"
+                                maxWidth="Infinity"
+                                styleClass="sidebar-button"/>
+
+                        <Button fx:id="btnProveedores" text="Proveedores" onAction="#mostrarProveedores"
+                                maxWidth="Infinity"
+                                styleClass="sidebar-button"/>
+
+                        <Button fx:id="btnConfiguracion" text="Configuración" onAction="#mostrarConfiguracion"
+                                maxWidth="Infinity"
+                                styleClass="sidebar-button"/>
+
+
+                    </children>
+                </VBox>
+
+                <!-- Imagen inferior -->
+                <StackPane alignment="BOTTOM_CENTER" prefHeight="200">
+                    <children>
+                        <ImageView fitHeight="200" fitWidth="240" preserveRatio="false"/>
+                    </children>
+                </StackPane>
+
+            </children>
+        </VBox>
+    </left>
+
+    <!-- ====================== CONTENIDO PRINCIPAL ====================== -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: white;">
+            <content>
+                <VBox spacing="20">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+
+                    <!-- Título -->
+                    <children>
+                        <Label text="Inicio"
+                               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+                        <!-- ======= Tarjetas estadísticas ======= -->
+                        <HBox spacing="20">
+                            <children>
+
+                                <!-- Tarjeta 1 -->
+                                <VBox alignment="CENTER" spacing="5"
+                                      style="-fx-background-color: #f5f5f5; -fx-background-radius: 8;"
+                                      prefWidth="200">
+                                    <padding>
+                                        <Insets top="20" right="20" bottom="20" left="20"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="227" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                                        <Label text="Productos disponibles"/>
+                                    </children>
+                                </VBox>
+
+                                <!-- Tarjeta 2 -->
+                                <VBox alignment="CENTER" spacing="5"
+                                      style="-fx-background-color: #f5f5f5; -fx-background-radius: 8;"
+                                      prefWidth="200">
+                                    <padding>
+                                        <Insets top="20" right="20" bottom="20" left="20"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="23" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                                        <Label text="Productos agotados"/>
+                                    </children>
+                                </VBox>
+
+                                <!-- Tarjeta 3 -->
+                                <VBox alignment="CENTER" spacing="5"
+                                      style="-fx-background-color: #f5f5f5; -fx-background-radius: 8;"
+                                      prefWidth="200">
+                                    <padding>
+                                        <Insets top="20" right="20" bottom="20" left="20"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="1584" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                                        <Label text="Dinero total"/>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </HBox>
+
+                        <!-- ======= Gráficas ======= -->
+                        <HBox spacing="20">
+                            <children>
+
+                                <!-- Gráfica circular -->
+                                <VBox spacing="10" prefWidth="400"
+                                      style="-fx-background-color: #f5f5f5; -fx-background-radius: 8;">
+                                    <padding>
+                                        <Insets top="20" right="20" bottom="20" left="20"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="Inventario por categoría"
+                                               style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                        <PieChart fx:id="chartCategorias" prefHeight="250"/>
+                                    </children>
+                                </VBox>
+
+                                <!-- Gráfica de barras -->
+                                <VBox spacing="10" prefWidth="400"
+                                      style="-fx-background-color: #f5f5f5; -fx-background-radius: 8;">
+                                    <padding>
+                                        <Insets top="20" right="20" bottom="20" left="20"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="Ventas de la semana"
+                                               style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                                        <BarChart fx:id="chartVentas" prefHeight="250">
+                                            <xAxis>
+                                                <CategoryAxis/>
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis/>
+                                            </yAxis>
+                                        </BarChart>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </HBox>
+
+                        <!-- ======= Advertencia ======= -->
+                        <HBox spacing="10"
+                              style="-fx-background-color: #f5f5f5; -fx-background-radius: 8;">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <children>
+                                <Label text="⚠"/>
+                                <Label text="El producto Chocolate Abuelita está por agotarse"
+                                       style="-fx-font-size: 14px;"/>
+                            </children>
+                        </HBox>
+
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

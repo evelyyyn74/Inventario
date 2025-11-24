@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/18.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.ProveedoresController"
+            prefWidth="1100" prefHeight="700">
+
+    <top>
+        <VBox spacing="5">
+            <padding>
+                <Insets top="20" right="30" bottom="10" left="30"/>
+            </padding>
+
+            <Label text="Proveedores"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="10">
+                <children>
+                    <TextField fx:id="txtBuscar"
+                               promptText="Buscar proveedores..."
+                               prefWidth="500"/>
+
+                    <Button text="Buscar"
+                            onAction="#buscarProveedor"
+                            style="-fx-background-color: #4a90e2; -fx-text-fill: white;"/>
+
+                    <Button text="Agregar Proveedor"
+                            onAction="#abrirAgregar"
+                            style="-fx-background-color: #4a90e2; -fx-text-fill: white;"/>
+                </children>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="30" bottom="20" left="30"/>
+            </padding>
+
+            <TableView fx:id="tablaProveedores" prefHeight="500">
+                <columns>
+                    <TableColumn fx:id="colNumero" text="No." prefWidth="50"/>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150"/>
+                    <TableColumn fx:id="colNombreEmpresa" text="Nombre de la empresa" prefWidth="200"/>
+                    <TableColumn fx:id="colTelefono" text="Teléfono" prefWidth="140"/>
+                    <TableColumn fx:id="colCorreo" text="Correo" prefWidth="180"/>
+                    <TableColumn fx:id="colDireccion" text="Dirección" prefWidth="200"/>
+                    <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.6"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mx.edu.utez.datamonkey.controller.InventarioController"
+      spacing="15">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- TÍTULO -->
+    <Label text="Inventario"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+
+    <!-- Buscar -->
+    <HBox spacing="10">
+        <children>
+            <TextField fx:id="txtBuscar" promptText="Buscar productos..." prefWidth="350"/>
+            <Button text="Buscar" onAction="#buscar"/>
+        </children>
+    </HBox>
+
+    <!-- Categorías -->
+    <HBox spacing="20">
+        <children>
+            <Button text="Materia prima" onAction="#filtrarMateriaPrima"/>
+            <Button text="Complementos" onAction="#filtrarComplementos"/>
+            <Button text="Insumos" onAction="#filtrarInsumos"/>
+            <Button text="Consumibles" onAction="#filtrarConsumibles"/>
+            <Button text="Limpieza" onAction="#filtrarLimpieza"/>
+            <Button text="Mantenimiento" onAction="#filtrarMantenimiento"/>
+            <Button text="Uniforme" onAction="#filtrarUniforme"/>
+        </children>
+    </HBox>
+
+    <!-- Tabla -->
+    <TableView fx:id="tablaInventario" prefHeight="500">
+
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150"/>
+            <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="120"/>
+            <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
+            <TableColumn fx:id="colMedida" text="Medida" prefWidth="100"/>
+            <TableColumn fx:id="colPrecio" text="Precio" prefWidth="100"/>
+            <TableColumn fx:id="colProveedor" text="Proveedor" prefWidth="150"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="120"/>
+            <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="150"/>
+        </columns>
+
+    </TableView>
+
+</VBox>

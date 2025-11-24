@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/18.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mx.edu.utez.datamonkey.controller.AgregarProductoController"
+      spacing="15" alignment="TOP_CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- TÍTULO -->
+    <Label text="Agregar / Editar Producto"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <!-- FORMULARIO -->
+    <GridPane hgap="15" vgap="15">
+
+        <children>
+
+            <!-- Nombre -->
+            <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtNombre" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="250"/>
+
+            <!-- Categoría -->
+            <Label text="Categoría:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtCategoria" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <!-- Stock -->
+            <Label text="Stock:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtStock" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Medida -->
+            <Label text="Medida:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtMedida" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <!-- Precio -->
+            <Label text="Precio:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtPrecio" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <!-- Proveedor -->
+            <Label text="Proveedor:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtProveedor" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+        </children>
+    </GridPane>
+
+    <!-- BOTONES -->
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Guardar"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                onAction="#guardar"/>
+
+        <Button text="Cancelar"
+                style="-fx-background-color: #E63946; -fx-text-fill: white;"
+                onAction="#cerrarVentana"/>
+    </HBox>
+
+</VBox>

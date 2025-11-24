@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx/18.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="20"
+      style="-fx-padding: 20;">
+
+    <!-- Título -->
+    <Label text="Inicio"
+           style="-fx-font-size: 26px; -fx-font-weight: bold;" />
+
+    <!-- Tarjetas estadísticas -->
+    <HBox spacing="20">
+        <children>
+
+            <!-- Tarjeta 1 -->
+            <VBox alignment="CENTER" spacing="5"
+                  style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 20;"
+                  prefWidth="250">
+                <Label text="227" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                <Label text="Productos disponibles"/>
+            </VBox>
+
+            <!-- Tarjeta 2 -->
+            <VBox alignment="CENTER" spacing="5"
+                  style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 20;"
+                  prefWidth="250">
+                <Label text="23" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                <Label text="Productos agotados"/>
+            </VBox>
+
+            <!-- Tarjeta 3 -->
+            <VBox alignment="CENTER" spacing="5"
+                  style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 20;"
+                  prefWidth="250">
+                <Label text="1584" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                <Label text="Dinero total"/>
+            </VBox>
+
+        </children>
+    </HBox>
+
+    <!-- Gráficas -->
+    <HBox spacing="20">
+
+        <!-- Gráfica circular -->
+        <VBox spacing="10" prefWidth="400"
+              style="-fx-background-color: #f5f5f5; -fx-padding: 20; -fx-background-radius: 10;">
+            <Label text="Inventario por categoría"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <PieChart fx:id="chartCategorias" prefHeight="250"/>
+        </VBox>
+
+        <!-- Gráfica de barras -->
+        <VBox spacing="10" prefWidth="400"
+              style="-fx-background-color: #f5f5f5; -fx-padding: 20; -fx-background-radius: 10;">
+            <Label text="Ventas de la semana"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <BarChart fx:id="chartVentas" prefHeight="250">
+                <xAxis>
+                    <CategoryAxis/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+    </HBox>
+
+    <!-- Advertencia -->
+    <HBox spacing="10"
+          style="-fx-background-color: #f5f5f5; -fx-padding: 15; -fx-background-radius: 10;">
+        <children>
+            <Label text="⚠"/>
+            <Label text="El producto Chocolate Abuelita está por agotarse"
+                   style="-fx-font-size: 14px;"/>
+        </children>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/18.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.ConfiguracionController">
+
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="40" bottom="10" left="40"/>
+            </padding>
+            <Label text="Configuración"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="20">
+            <padding>
+                <Insets top="10" right="40" bottom="20" left="40"/>
+            </padding>
+
+            <!-- Empresa -->
+            <VBox spacing="10" style="-fx-background-color: #f5f5f5; -fx-padding: 20; -fx-background-radius: 8;">
+                <Label text="Empresa"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                        <ColumnConstraints minWidth="300"/>
+                    </columnConstraints>
+
+                    <children>
+                        <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtNombreEmpresa" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Dirección:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtDireccion" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Teléfono:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtTelefono" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </children>
+                </GridPane>
+            </VBox>
+
+            <!-- Inventario -->
+            <VBox spacing="10" style="-fx-background-color: #f5f5f5; -fx-padding: 20; -fx-background-radius: 8;">
+                <Label text="Inventario"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="150"/>
+                        <ColumnConstraints minWidth="300"/>
+                    </columnConstraints>
+
+                    <children>
+                        <Label text="Stock mínimo global:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtStockMinimo" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Unidad por defecto:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="comboUnidad" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    </children>
+                </GridPane>
+            </VBox>
+
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="Guardar cambios"
+                        onAction="#guardarCambios"
+                        style="-fx-background-color: #4a90e2; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

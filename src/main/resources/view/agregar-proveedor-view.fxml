@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/18.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mx.edu.utez.datamonkey.controller.AgregarProveedorController"
+      spacing="15" alignment="TOP_CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Proveedor"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="100"/>
+            <ColumnConstraints minWidth="250"/>
+        </columnConstraints>
+
+        <children>
+            <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtNombre" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Empresa:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtEmpresa" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Teléfono:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtTelefono" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Correo:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtCorreo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Dirección:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtDireccion" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        </children>
+    </GridPane>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Guardar"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                onAction="#guardar"/>
+
+        <Button text="Cancelar"
+                style="-fx-background-color: #E63946; -fx-text-fill: white;"
+                onAction="#cerrarVentana"/>
+    </HBox>
+
+</VBox>

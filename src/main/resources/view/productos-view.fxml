@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/18.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.ProductosController"
+            prefWidth="1100" prefHeight="700">
+
+    <!-- TOP - Título -->
+    <top>
+        <VBox spacing="5">
+            <padding><Insets top="20" right="30" bottom="10" left="30"/></padding>
+            <children>
+                <Label text="Productos"
+                       style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <Separator/>
+            </children>
+        </VBox>
+    </top>
+
+    <!-- CENTER - Contenido -->
+    <center>
+        <VBox spacing="20">
+            <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+            <children>
+
+                <!-- BUSCADOR -->
+                <HBox spacing="10">
+                    <children>
+                        <TextField fx:id="txtBuscar"
+                                   promptText="Buscar productos..."
+                                   prefWidth="500"/>
+                        <Button text="Buscar" onAction="#buscarProducto"
+                                style="-fx-background-color: #4a90e2; -fx-text-fill: white;"/>
+                        <Button text="Agregar Producto" onAction="#abrirAgregar"
+                                style="-fx-background-color: #4a90e2; -fx-text-fill: white;"/>
+                    </children>
+                </HBox>
+
+                <!-- TABLA -->
+                <TableView fx:id="tablaProductos" prefHeight="500">
+
+                    <!-- Columnas -->
+                    <columns>
+
+                        <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150"/>
+                        <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="150"/>
+                        <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
+                        <TableColumn fx:id="colMedida" text="Medida" prefWidth="80"/>
+                        <TableColumn fx:id="colPrecio" text="Precio" prefWidth="100"/>
+                        <TableColumn fx:id="colProveedor" text="Proveedor" prefWidth="150"/>
+                        <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+                        <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="150"/>
+
+                    </columns>
+
+                </TableView>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>
