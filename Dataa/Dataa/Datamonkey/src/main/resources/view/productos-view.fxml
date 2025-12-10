@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.ProductosController">
+
+    <!-- TOP - Título -->
+    <top>
+        <VBox spacing="5">
+            <padding>
+                <Insets bottom="10" left="30" right="30" top="20" />
+            </padding>
+            <children>
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Productos" />
+                <Separator />
+            </children>
+        </VBox>
+    </top>
+
+    <!-- CENTER - Contenido -->
+    <center>
+        <!-- ESTE VBox ahora deja que la tabla crezca -->
+        <VBox spacing="20">
+            <padding>
+                <Insets bottom="20" left="30" right="30" top="20" />
+            </padding>
+            <children>
+
+                <!-- BUSCADOR -->
+                <HBox spacing="10">
+                    <children>
+                        <!-- El buscador crece con el espacio disponible -->
+                        <TextField fx:id="txtBuscar"
+                                   HBox.hgrow="ALWAYS"
+                                   prefHeight="31.0"
+                                   promptText="Buscar productos..." />
+
+                        <Button onAction="#buscarProducto"
+                                prefHeight="31.0"
+                                style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;"
+                                text="Buscar">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Button>
+
+                        <Button onAction="#abrirAgregar"
+                                prefHeight="31.0"
+                                style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;"
+                                text="Agregar Producto">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- TABLA: la tabla ahora se estira a lo alto -->
+                <TableView fx:id="tablaProductos"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+                        <TableColumn fx:id="colId"        text="ID" />
+                        <TableColumn fx:id="colNombre"    text="Nombre" />
+                        <TableColumn fx:id="colCategoria" text="Categoría" />
+                        <TableColumn fx:id="colStock"     text="Stock" />
+                        <TableColumn fx:id="colMedida"    text="Medida" />
+                        <TableColumn fx:id="colPrecio"    text="Precio" />
+                        <TableColumn fx:id="colProveedor" text="Proveedor" />
+                        <TableColumn fx:id="colEstado"    text="Estado" />
+                        <TableColumn fx:id="colAcciones"  text="Acciones" />
+                    </columns>
+
+                </TableView>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>
+

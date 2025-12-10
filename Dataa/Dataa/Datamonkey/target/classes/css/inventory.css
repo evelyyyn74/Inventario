@@ -1,0 +1,29 @@
+.table-view .column-header-background { -fx-background-color: #f3f4f6; }
+.btn-pill {
+    -fx-background-color: linear-gradient(to bottom, #cfcfd6, #bfc7d1);
+    -fx-text-fill: #1f2937; -fx-background-radius: 999; -fx-padding: 4 10 4 10;
+}
+.btn-grey {
+    -fx-background-color: #e5e7eb;
+}
+.toggle-button {
+    -fx-background-radius: 999; -fx-padding: 4 12 4 12; -fx-background-color: #eef2f7;
+}
+.toggle-button:selected {
+    -fx-background-color: #c7d2fe; -fx-text-fill: #1f2937;
+}
+/* PIE CHART COLORS */
+.chart-pie.data0 {
+    -fx-pie-color: #6EC6FF; /* Azul cielo claro */
+}
+.chart-pie.data1 {
+    -fx-pie-color: #4AAFF0; /* Azul cielo más fuerte */
+}
+
+/* BAR CHART COLORS */
+.default-color0.chart-bar {
+    -fx-bar-fill: green;
+}
+.default-color1.chart-bar {
+    -fx-bar-fill: #4AAFF0;
+}

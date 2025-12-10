@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.ConfiguracionController">
+
+    <top>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets bottom="10" left="40" right="40" top="20" />
+            </padding>
+            <children>
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold;"
+                       text="Configuración" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="25">
+            <padding>
+                <Insets bottom="20" left="40" right="40" top="10" />
+            </padding>
+
+            <children>
+
+                <!-- EMPRESA -->
+                <VBox spacing="15" maxWidth="600"
+                      style="-fx-background-color: white;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 12, 0.2, 0, 3);">
+                    <children>
+
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                               text="Empresa" />
+
+                        <GridPane hgap="10" vgap="12" alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" minWidth="120" />
+                                <ColumnConstraints minWidth="300" />
+                            </columnConstraints>
+
+                            <children>
+                                <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="txtNombreEmpresa" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <TextField fx:id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            </children>
+                        </GridPane>
+
+                    </children>
+                </VBox>
+
+                <!-- INVENTARIO -->
+                <VBox spacing="15" maxWidth="600"
+                      style="-fx-background-color: white;
+                             -fx-padding: 20;
+                             -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 12, 0.2, 0, 3);">
+                    <children>
+
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                               text="Inventario" />
+
+                        <GridPane hgap="10" vgap="12" alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" minWidth="150" />
+                                <ColumnConstraints minWidth="300" />
+                            </columnConstraints>
+
+                            <children>
+                                <Label text="Stock mínimo global:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="txtStockMinimo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            </children>
+                        </GridPane>
+
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER">
+                    <children>
+                        <Button onAction="#guardarCambios"
+                                style="-fx-background-color: #4a90e2; -fx-text-fill: white;"
+                                text="Guardar cambios" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="518.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.LoginController">
+
+    <children>
+        <HBox prefHeight="450" prefWidth="900">
+            <children>
+
+                <!-- PANEL IZQUIERDO -->
+                <VBox alignment="CENTER" prefHeight="509.0" prefWidth="467.0" spacing="10.0">
+                    <padding>
+                        <Insets bottom="50" left="80" right="80" top="30" />
+                    </padding>
+                    <children>
+
+                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold;"
+                               text="Bienvenido a StockMon" />
+
+                        <Region prefHeight="10" />
+
+                        <StackPane alignment="CENTER">
+                            <children>
+                                <ImageView fitHeight="60.0" fitWidth="89.0">
+                                    <image>
+                                        <Image url="@../images/user.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </StackPane>
+
+                        <Label style="-fx-font-size: 23px; -fx-font-weight: bold;"
+                               text="Iniciar Sesión" />
+                        <Label style="-fx-text-fill: #666666; -fx-font-size: 14px;"
+                               text="Accede a tu cuenta para continuar" />
+
+                        <Region prefHeight="10" />
+
+                        <!-- CAMPO USUARIO -->
+                        <Label style="-fx-font-size: 14px;" text="Usuario" textAlignment="LEFT" prefWidth="400.0" />
+                        <TextField fx:id="txtUsuario"
+                                   prefHeight="35.0" prefWidth="400.0"
+                                   promptText="Usuario123"
+                                   style="-fx-border-radius: 5; -fx-border-color: #86AEBA;" />
+
+                        <!-- CAMPO CONTRASEÑA -->
+                        <Label style="-fx-font-size: 14px;" text="Contraseña" textAlignment="LEFT" prefWidth="400.0" />
+                        <PasswordField fx:id="txtContrasena"
+                                       prefHeight="35.0"
+                                       promptText="********"
+                                       style="-fx-border-radius: 5; -fx-border-color: #86AEBA;" />
+
+
+
+                        <!-- BOTÓN INICIAR SESIÓN -->
+                        <Button fx:id="btnIniciarSesion"
+                                onAction="#onIniciarSesion"
+                                prefHeight="35.0" prefWidth="400.0"
+                                style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2);
+                                       -fx-background-radius: 5;
+                                       -fx-text-fill: white;
+                                       -fx-font-size: 16px;"
+                                text="Iniciar Sesión" />
+
+                        <!-- 🔥 LABEL DE ERROR (REPARADO) -->
+                        <Label fx:id="lblError"
+                               text=""
+                               style="-fx-text-fill: red; -fx-font-size: 13px;" />
+
+
+                    </children>
+                </VBox>
+
+                <!-- PANEL DERECHO -->
+                <StackPane prefHeight="503.0" prefWidth="433.0">
+                    <children>
+                        <ImageView fitHeight="517.0" fitWidth="433.0">
+                            <image>
+                                <Image url="@../images/montana.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </StackPane>
+
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

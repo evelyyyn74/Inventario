@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.ProveedoresController">
+
+    <!-- TOP: título -->
+    <top>
+        <VBox spacing="5">
+            <padding>
+                <Insets bottom="10" left="30" right="30" top="20"/>
+            </padding>
+            <children>
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold;"
+                       text="Proveedores"/>
+                <Separator/>
+            </children>
+        </VBox>
+    </top>
+
+    <!-- CENTER: buscador + tabla -->
+    <center>
+        <VBox spacing="20">
+            <padding>
+                <Insets bottom="20" left="30" right="30" top="20"/>
+            </padding>
+            <children>
+
+                <!-- BUSCADOR -->
+                <HBox spacing="10">
+                    <children>
+                        <TextField fx:id="txtBuscar"
+                                   HBox.hgrow="ALWAYS"
+                                   prefHeight="31.0"
+                                   promptText="Buscar proveedores..."/>
+
+                        <Button onAction="#buscarProveedor"
+                                prefHeight="31.0"
+                                style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;"
+                                text="Buscar">
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
+                        </Button>
+
+                        <Button onAction="#abrirAgregar"
+                                prefHeight="31.0"
+                                style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;"
+                                text="Agregar Proveedor">
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- TABLA -->
+                <TableView fx:id="tablaProveedores"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+                        <TableColumn fx:id="colNumero"        text="No."/>
+                        <TableColumn fx:id="colNombre"        text="Nombre"/>
+                        <TableColumn fx:id="colNombreEmpresa" text="Nombre de la empresa"/>
+                        <TableColumn fx:id="colTelefono"      text="Teléfono"/>
+                        <TableColumn fx:id="colCorreo"        text="Correo"/>
+                        <TableColumn fx:id="colDireccion"     text="Dirección"/>
+                        <TableColumn fx:id="colAcciones"      text="Acciones"/>
+                    </columns>
+                </TableView>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

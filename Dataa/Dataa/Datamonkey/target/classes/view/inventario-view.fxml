@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.datamonkey.controller.InventarioController">
+
+    <padding>
+        <Insets bottom="20" left="30" right="30" top="20" />
+    </padding>
+   <children>
+   
+       <!-- TÍTULO -->
+       <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Inventario" />
+   
+       <Separator />
+   
+       <!-- BUSCADOR -->
+       <HBox spacing="10">
+           <children>
+   
+               <TextField fx:id="txtBuscar" prefHeight="32" promptText="Buscar productos..." HBox.hgrow="ALWAYS" />
+   
+               <Button onAction="#buscar" prefHeight="32" prefWidth="111.0" style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;" text="Buscar">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+   
+           </children>
+       </HBox>
+   
+       <!-- CATEGORÍAS -->
+       <HBox spacing="12">
+      <children>
+      
+              <Button onAction="#filtrarMateriaPrima" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Materia prima" />
+      
+              <Button onAction="#filtrarInsumos" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Insumos" />
+      
+              <!-- Consumibles ELIMINADO -->
+      
+              <Button onAction="#filtrarLimpieza" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Limpieza" />
+      
+              <Button onAction="#filtrarMantenimiento" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Mantenimiento" />
+      
+              <Button onAction="#filtrarUniforme" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Uniforme" />
+      </children>
+   
+       </HBox>
+   
+       <!-- TABLA -->
+       <TableView fx:id="tablaInventario" VBox.vgrow="ALWAYS">
+   
+           <columns>
+               <TableColumn fx:id="colId" text="ID" />
+               <TableColumn fx:id="colNombre" text="Nombre" />
+               <TableColumn fx:id="colCategoria" text="Categoría" />
+               <TableColumn fx:id="colStock" text="Stock" />
+               <TableColumn fx:id="colMedida" text="Medida" />
+               <TableColumn fx:id="colPrecio" text="Precio" />
+               <TableColumn fx:id="colProveedor" text="Proveedor" />
+               <TableColumn fx:id="colEstado" text="Estado" />
+               <TableColumn fx:id="colAcciones" text="Acciones" />
+           </columns>
+   
+       </TableView>
+   </children>
+
+</VBox>

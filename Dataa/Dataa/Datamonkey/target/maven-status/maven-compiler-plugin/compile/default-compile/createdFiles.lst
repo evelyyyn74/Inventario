@@ -1,0 +1,13 @@
+mx\edu\utez\datamonkey\model\Provider.class
+mx\edu\utez\datamonkey\config\DBConnection.class
+mx\edu\utez\datamonkey\controller\InventoryController.class
+mx\edu\utez\datamonkey\controller\ProvidersController.class
+mx\edu\utez\datamonkey\dao\AppConfigDAO.class
+mx\edu\utez\datamonkey\model\Product.class
+module-info.class
+mx\edu\utez\datamonkey\controller\DashboardController.class
+mx\edu\utez\datamonkey\MainApp.class
+mx\edu\utez\datamonkey\dao\ProductDAO.class
+mx\edu\utez\datamonkey\controller\ConfigController.class
+mx\edu\utez\datamonkey\HelloController.class
+mx\edu\utez\datamonkey\controller\LoginController.class

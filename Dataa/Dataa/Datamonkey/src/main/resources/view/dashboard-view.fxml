@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="mainPane" prefHeight="700" prefWidth="1200"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mx.edu.utez.datamonkey.controller.DashboardController">
+
+    <left>
+        <StackPane fx:id="sidebarRoot" maxWidth="180" minWidth="210" prefWidth="180">
+
+            <children>
+
+                <ImageView fx:id="sidebarBg" fitHeight="801.0" fitWidth="211.0"
+                           opacity="0.45" preserveRatio="false"
+                           StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../images/montana.png"/>
+                    </image>
+                </ImageView>
+
+                <VBox prefWidth="180" style="-fx-background-color: rgba(21,27,34,0.85);">
+
+                    <children>
+
+                        <!-- PERFIL -->
+                        <VBox alignment="CENTER" spacing="10">
+                            <padding>
+                                <Insets top="20" bottom="20" left="20" right="20"/>
+                            </padding>
+                            <children>
+                                <ImageView fitHeight="80" fitWidth="80" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/user.png"/>
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="lblUsuario" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Usuario"/>
+
+                            </children>
+                        </VBox>
+
+                        <Separator/>
+
+                        <!-- MENÚ -->
+                        <VBox spacing="8">
+                            <padding>
+                                <Insets top="10" bottom="10" left="10" right="10"/>
+                            </padding>
+
+                            <children>
+                                <ToggleButton fx:id="btnInicio" text="Inicio"
+                                              maxWidth="Infinity"
+                                              onAction="#mostrarInicio"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;"/>
+
+                                <ToggleButton fx:id="btnProductos" text="Productos"
+                                              maxWidth="Infinity"
+                                              onAction="#mostrarProductos"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;"/>
+
+                                <ToggleButton fx:id="btnInventario" text="Inventario"
+                                              maxWidth="Infinity"
+                                              onAction="#mostrarInventario"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;"/>
+
+                                <ToggleButton fx:id="btnProveedores" text="Proveedores"
+                                              maxWidth="Infinity"
+                                              onAction="#mostrarProveedores"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;"/>
+
+                                <ToggleButton fx:id="btnConfiguracion" text="Configuración"
+                                              maxWidth="Infinity"
+                                              onAction="#mostrarConfiguracion"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;"/>
+
+                                <!-- NUEVO BOTÓN REGISTRO -->
+                                <ToggleButton fx:id="btnRegistro" text="Registrar Usuario"
+                                              maxWidth="Infinity"
+                                              onAction="#mostrarRegistro"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;"/>
+                                <!-- BOTÓN CERRAR SESIÓN (con el mismo estilo que tus botones del menú) -->
+                                <ToggleButton text="Cerrar sesión"
+                                              maxWidth="Infinity"
+                                              onAction="#cerrarSesion"
+                                              style="-fx-background-color: transparent; -fx-text-fill: #ECEFF4;" />
+
+
+                            </children>
+                        </VBox>
+
+                        <Region VBox.vgrow="ALWAYS"/>
+
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentRoot"/>
+    </center>
+
+</BorderPane>

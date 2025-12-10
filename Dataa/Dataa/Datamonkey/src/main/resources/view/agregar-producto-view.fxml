@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="438" prefWidth="532" spacing="15"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mx.edu.utez.datamonkey.controller.AgregarProductoController">
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20"/>
+    </padding>
+
+    <children>
+
+        <!-- TÍTULO -->
+        <Label text="Producto" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <!-- FORMULARIO -->
+        <GridPane hgap="15" vgap="15">
+
+            <children>
+
+                <!-- Nombre -->
+                <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <!-- Categoría -->
+                <Label text="Categoría:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <ComboBox fx:id="cbCategoria" prefWidth="300" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <!-- Stock -->
+                <Label text="Stock:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="txtStock" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <!-- Medida -->
+                <Label text="Medida:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField fx:id="txtMedida" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <!-- Precio -->
+                <Label text="Precio:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <TextField fx:id="txtPrecio" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                <!-- Proveedor -->
+                <Label text="Proveedor:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                <TextField fx:id="txtProveedor" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                <!-- Estado -->
+                <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                <TextField fx:id="txtEstado" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            </children>
+
+        </GridPane>
+
+        <!-- BOTONES -->
+        <HBox alignment="BOTTOM_RIGHT" spacing="20">
+            <children>
+                <Button text="Cancelar" onAction="#cerrarVentana"
+                        prefHeight="34" prefWidth="95"
+                        style="-fx-background-color: #696E6F; -fx-text-fill: white;"/>
+
+                <Button text="Guardar" onAction="#guardar"
+                        prefHeight="34" prefWidth="95"
+                        style="-fx-background-color: #2768AB; -fx-text-fill: white;"/>
+            </children>
+        </HBox>
+
+    </children>
+
+</VBox>

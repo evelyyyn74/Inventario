@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx/18.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mx.edu.utez.datamonkey.controller.InicioController"
+      spacing="20"
+      style="-fx-padding: 20;"
+      VBox.vgrow="ALWAYS">
+
+    <!-- Título -->
+    <Label text="Inicio"
+           style="-fx-font-size: 26px; -fx-font-weight: bold;" />
+
+    <!-- Tarjetas estadísticas -->
+    <HBox spacing="20">
+
+        <VBox alignment="CENTER" spacing="5"
+              style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 20;"
+              prefWidth="250">
+            <Label fx:id="lblDisponibles"
+                   text="0"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+            <Label text="Productos disponibles"/>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="5"
+              style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 20;"
+              prefWidth="250">
+            <Label fx:id="lblAgotados"
+                   text="0"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+            <Label text="Productos agotados"/>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="5"
+              style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 20;"
+              prefWidth="250">
+            <Label fx:id="lblDinero"
+                   text="0"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+            <Label text="Dinero total"/>
+        </VBox>
+
+    </HBox>
+
+    <!-- Gráficas centradas y expandibles -->
+    <HBox spacing="20" alignment="CENTER" HBox.hgrow="ALWAYS">
+
+        <!-- PieChart -->
+        <VBox spacing="10"
+              style="-fx-background-color: #f5f5f5; -fx-padding: 20; -fx-background-radius: 10;"
+              HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+
+            <Label text="Inventario por categoría"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <PieChart fx:id="chartCategorias"
+                      VBox.vgrow="ALWAYS"
+                      prefHeight="350"/>
+        </VBox>
+
+        <!-- BarChart -->
+        <VBox spacing="10"
+              style="-fx-background-color: #f5f5f5; -fx-padding: 20; -fx-background-radius: 10;"
+              HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+
+            <Label text="Stock por categoría"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <BarChart fx:id="chartStock"
+                      VBox.vgrow="ALWAYS"
+                      prefHeight="350">
+
+                <xAxis>
+                    <CategoryAxis/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis/>
+                </yAxis>
+
+            </BarChart>
+        </VBox>
+
+    </HBox>
+
+    <!-- Advertencia -->
+    <HBox spacing="10"
+          style="-fx-background-color: #f5f5f5; -fx-padding: 15; -fx-background-radius: 10;">
+        <children>
+            <Label text="⚠"/>
+            <Label fx:id="lblAdvertencia" style="-fx-font-size: 14px;"/>
+        </children>
+    </HBox>
+
+</VBox>
