@@ -9,9 +9,10 @@ import javafx.geometry.Pos;
 import mx.edu.utez.datamonkey.dao.ProductoDao;
 import mx.edu.utez.datamonkey.model.Producto;
 
-import java.util.List;
-
 public class InventarioController {
+
+
+    //   TABLA Y COLUMNAS (FXML)
 
     @FXML private TableView<Producto> tablaInventario;
 
@@ -23,16 +24,29 @@ public class InventarioController {
     @FXML private TableColumn<Producto, Double> colPrecio;
     @FXML private TableColumn<Producto, String> colProveedor;
     @FXML private TableColumn<Producto, String> colEstado;
+
+    // Columna donde van los botones Ver / Editar
     @FXML private TableColumn<Producto, Void> colAcciones;
 
+    // Buscador
     @FXML private TextField txtBuscar;
 
-    private final ProductoDao dao = new ProductoDao();
-    private final ObservableList<Producto> lista = FXCollections.observableArrayList();
+    //   DAO Y LISTA DINÁMICA
 
+    private final ProductoDao dao = new ProductoDao(); // Acceso a BD
+    private final ObservableList<Producto> lista = FXCollections.observableArrayList(); // Lista observable para la tabla
+
+
+    //   INICIALIZACIÓN DE LA VISTA
+
+    /**
+     * Metodo que se ejecuta automáticamente al cargar la vista.
+     * Configura columnas, redimensionamiento, botones y carga datos.
+     */
     @FXML
     public void initialize() {
 
+        // Enlazar columnas con atributos del modelo Producto
         colId.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getId()).asObject());
         colNombre.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNombre()));
         colCategoria.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCategoria()));
@@ -42,28 +56,29 @@ public class InventarioController {
         colProveedor.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getProveedor()));
         colEstado.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getEstado()));
 
-        // 🔹 MISMA POLÍTICA DE REDIMENSIONADO QUE PRODUCTOS
-        tablaInventario.setColumnResizePolicy(
-                TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS
-        );
+        // Establecer política de redimensionamiento proporcional
+        tablaInventario.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
-        // 🔹 MISMOS PORCENTAJES QUE LA TABLA DE PRODUCTOS
-        bindWidth(colId,        0.05);  // 5%
-        bindWidth(colNombre,    0.18);  // 18%
-        bindWidth(colCategoria, 0.12);  // 12%
-        bindWidth(colStock,     0.08);  // 8%
-        bindWidth(colMedida,    0.08);  // 8%
-        bindWidth(colPrecio,    0.10);  // 10%
-        bindWidth(colProveedor, 0.18);  // 18%
-        bindWidth(colEstado,    0.06);  // 6%
-        bindWidth(colAcciones,  0.15);  // 15%
+        // Asignar ancho relativo a cada columna (porcentajes)
+        bindWidth(colId,        0.05);
+        bindWidth(colNombre,    0.18);
+        bindWidth(colCategoria, 0.12);
+        bindWidth(colStock,     0.08);
+        bindWidth(colMedida,    0.08);
+        bindWidth(colPrecio,    0.10);
+        bindWidth(colProveedor, 0.18);
+        bindWidth(colEstado,    0.06);
+        bindWidth(colAcciones,  0.15);
 
-        agregarBotones();
-        cargarInventario();
+        agregarBotones();   // Agregar botones Ver / Editar en la tabla
+        cargarInventario(); // Cargar productos desde BD
     }
 
+    //   AJUSTE DE ANCHO POR PORCENTAJE
+
     /**
-     * Ajusta el ancho de la columna como porcentaje del ancho total de la tabla.
+     * Ajusta el ancho de cada columna basado en un factor proporcional
+     * al tamaño total de la tabla.
      */
     private void bindWidth(TableColumn<?, ?> col, double factor) {
         tablaInventario.widthProperty().addListener((obs, oldW, newW) -> {
@@ -71,15 +86,24 @@ public class InventarioController {
         });
     }
 
+    //   CARGAR DATOS DEL INVENTARIO
 
+    /**
+     * Limpia y vuelve a cargar todos los productos desde la base de datos.
+     */
     private void cargarInventario() {
         lista.clear();
         lista.addAll(dao.obtenerTodos());
         tablaInventario.setItems(lista);
     }
 
-    // ===================== BOTONES =====================
 
+    //   BOTONES DE ACCIONES POR FILA
+
+    /**
+     * Agrega los botones Ver y Editar dentro de la tabla,
+     * utilizando una celda personalizada.
+     */
     private void agregarBotones() {
 
         colAcciones.setCellFactory(col -> new TableCell<>() {
@@ -88,11 +112,14 @@ public class InventarioController {
             private final Button btnEditar = new Button("Editar");
 
             {
+                // Estilos visuales de los botones
                 btnVer.setStyle("-fx-background-color: linear-gradient(to right, #547289, #696E6F); -fx-text-fill: white;");
                 btnEditar.setStyle("-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;");
 
                 btnVer.setMinWidth(65);
                 btnEditar.setMinWidth(65);
+
+                // Aquí luego añadiremos las acciones Ver y Editar con modal
             }
 
             @Override
@@ -110,8 +137,11 @@ public class InventarioController {
         });
     }
 
-    // ===================== BUSCAR =====================
+    //   BUSCADOr
 
+    /**
+     * Filtra los productos según coincidencia en nombre o categoría.
+     */
     @FXML
     private void buscar() {
         String filtro = txtBuscar.getText().trim().toLowerCase();
@@ -126,6 +156,7 @@ public class InventarioController {
         for (Producto p : lista) {
             if (p.getNombre().toLowerCase().contains(filtro) ||
                     p.getCategoria().toLowerCase().contains(filtro)) {
+
                 filtrados.add(p);
             }
         }
@@ -133,15 +164,18 @@ public class InventarioController {
         tablaInventario.setItems(filtrados);
     }
 
-    // ===================== FILTROS POR CATEGORÍA =====================
+    //   FILTROS POR CATEGORÍA
 
     @FXML private void filtrarMateriaPrima() { filtrar("Materia prima"); }
     @FXML private void filtrarComplementos() { filtrar("Complementos"); }
-    @FXML private void filtrarInsumos() { filtrar("Insumos"); }
-    @FXML private void filtrarLimpieza() { filtrar("Limpieza"); }
+    @FXML private void filtrarInsumos()      { filtrar("Insumos"); }
+    @FXML private void filtrarLimpieza()     { filtrar("Limpieza"); }
     @FXML private void filtrarMantenimiento() { filtrar("Mantenimiento"); }
-    @FXML private void filtrarUniforme() { filtrar("Uniforme"); }
+    @FXML private void filtrarUniforme()     { filtrar("Uniforme"); }
 
+    /**
+     * Muestra únicamente los productos de la categoría seleccionada.
+     */
     private void filtrar(String categoria) {
         ObservableList<Producto> filtrados = FXCollections.observableArrayList();
 

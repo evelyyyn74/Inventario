@@ -17,11 +17,20 @@ import java.sql.ResultSet;
 
 public class LoginController {
 
-    @FXML private TextField txtUsuario;
-    @FXML private PasswordField txtContrasena;
-    @FXML private Button btnIniciarSesion;
-    @FXML private Label lblError;
+    //   CAMPOS DE LA INTERFAZ (FXML)
 
+    @FXML private TextField txtUsuario;         // Campo donde se escribe el usuario
+    @FXML private PasswordField txtContrasena;  // Campo de contraseña
+    @FXML private Button btnIniciarSesion;      // Botón para iniciar sesión
+    @FXML private Label lblError;               // Etiqueta para mostrar mensajes de error
+
+
+    //   BOTÓN INICIAR SESIÓN
+
+    /**
+     * Se ejecuta al presionar el botón "Iniciar sesión".
+     * Valida los campos, consulta la base de datos y abre el dashboard según el rol.
+     */
     @FXML
     private void onIniciarSesion() {
 
@@ -30,6 +39,7 @@ public class LoginController {
         String usuario = txtUsuario.getText().trim();
         String contrasena = txtContrasena.getText().trim();
 
+        // Validación rápida de campos vacíos
         if (usuario.isEmpty() || contrasena.isEmpty()) {
             lblError.setText("⚠ Por favor, completa todos los campos.");
             lblError.setTextFill(Color.RED);
@@ -37,10 +47,14 @@ public class LoginController {
             return;
         }
 
+
+        //   CONSULTA A LA BASE DE DATOS
+
         try (Connection conn = DBConnection.getConnection()) {
 
             String query = "SELECT USUARIO, ROL FROM USUARIOS WHERE USUARIO = ? AND CONTRASENA = ?";
             PreparedStatement ps = conn.prepareStatement(query);
+
             ps.setString(1, usuario);
             ps.setString(2, contrasena);
 
@@ -48,9 +62,11 @@ public class LoginController {
 
             if (rs.next()) {
 
-                String rol = rs.getString("ROL"); // <-- SE TOMA EL ROL
+                // ⚡ Se obtiene el rol del usuario autenticado
+                String rol = rs.getString("ROL");
 
-                cargarDashboard(usuario, rol); // <-- SE ENVÍA AL DASHBOARD
+                // Abrir dashboard enviando usuario y rol
+                cargarDashboard(usuario, rol);
 
             } else {
                 lblError.setText(" Usuario o contraseña incorrectos.");
@@ -65,6 +81,13 @@ public class LoginController {
         }
     }
 
+
+    //   ANIMACIÓN DE ERROR
+
+    /**
+     * Aplica una pequeña animación de "vibración" cuando hay un error,
+     * para llamar la atención del usuario.
+     */
     private void shake(javafx.scene.Node node) {
         TranslateTransition tt = new TranslateTransition(Duration.millis(70), node);
         tt.setByX(10);
@@ -73,19 +96,27 @@ public class LoginController {
         tt.play();
     }
 
+    //   ABRIR DASHBOARD
+
+    /**
+     * Abre la ventana principal del sistema (dashboard) y envía
+     * el usuario y el rol para personalizar permisos.
+     */
     private void cargarDashboard(String usuario, String rol) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dashboard-view.fxml"));
             Parent root = loader.load();
 
+            // Se obtiene el controlador del dashboard para enviarle datos
             DashboardController ctrl = loader.getController();
-            ctrl.setUsuarioActual(usuario, rol); // <-- SE PASAN DOS DATOS
+            ctrl.setUsuarioActual(usuario, rol);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("StockMon - Dashboard");
             stage.show();
 
+            // Cierra la ventana del login
             ((Stage) btnIniciarSesion.getScene().getWindow()).close();
 
         } catch (Exception e) {

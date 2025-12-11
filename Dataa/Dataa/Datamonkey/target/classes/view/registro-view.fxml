@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700" prefWidth="1200"
-            xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="mx.edu.utez.datamonkey.controller.RegistroController">
+<BorderPane prefHeight="700" prefWidth="1200" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.datamonkey.controller.RegistroController">
 
     <center>
         <StackPane style="-fx-background-color: white;">
             <children>
 
-                <VBox alignment="CENTER" maxWidth="500" spacing="15"
-                      style="-fx-background-color: #F5F5F5; -fx-padding: 20;">
+                <VBox alignment="CENTER" maxWidth="536.0" prefHeight="700.0" prefWidth="536.0" spacing="15" style="-fx-padding: 20;">
 
                     <children>
 
-                        <Label text="Registrar Cuenta" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                        <Label text="Regístrate para acceder a StockMon"
-                               style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                        <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Registrar Cuenta" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #666;" text="Regístrate para acceder a StockMon" />
 
-                        <ImageView fitHeight="70" fitWidth="70">
+                        <ImageView fitHeight="70" fitWidth="104.0">
                             <image>
                                 <Image url="@../images/user.png" />
                             </image>
@@ -58,20 +54,16 @@
                             </children>
                         </VBox>
 
-                        <Button onAction="#registrarUsuario"
-                                text="Crear Cuenta"
-                                maxWidth="380"
-                                style="-fx-background-color: #1d6fb8; -fx-text-fill: white;" />
+                        <Button maxWidth="380" onAction="#registrarUsuario" style="-fx-background-color: #1d6fb8; -fx-text-fill: white;" text="Crear Cuenta" />
 
                         <HBox alignment="CENTER" spacing="5">
                             <children>
                                 <Label text="¿Ya tienes cuenta?" />
-                                <Hyperlink text="Inicia sesión" onAction="#volverAlLogin" />
+                                <Hyperlink onAction="#volverAlLogin" text="Inicia sesión" />
                             </children>
                         </HBox>
 
-                        <Label fx:id="lblMensaje"
-                               style="-fx-font-size: 14px; -fx-text-fill: red;" />
+                        <Label fx:id="lblMensaje" style="-fx-font-size: 14px; -fx-text-fill: red;" />
 
                     </children>
                 </VBox>

@@ -59,13 +59,17 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-              <Button onAction="#guardar" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #2768AB; -fx-text-fill: white;" text="Guardar">
-               <font>
+          <Button fx:id="btnGuardar" onAction="#guardar" prefHeight="34" prefWidth="95" style="-fx-background-color: #2768AB; -fx-text-fill: white;" text="Guardar">
+
+          <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
+
       </children>
        </HBox>
+       <Label fx:id="lblMensaje" text=""
+              style="-fx-text-fill: green; -fx-font-size: 13px; -fx-font-weight: bold;"/>
    </children>
 
 </VBox>

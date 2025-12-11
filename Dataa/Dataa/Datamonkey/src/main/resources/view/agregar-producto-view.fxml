@@ -68,6 +68,9 @@
                         style="-fx-background-color: #2768AB; -fx-text-fill: white;"/>
             </children>
         </HBox>
+        <Label fx:id="lblMensaje" text=""
+               style="-fx-text-fill: green; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+
 
     </children>
 

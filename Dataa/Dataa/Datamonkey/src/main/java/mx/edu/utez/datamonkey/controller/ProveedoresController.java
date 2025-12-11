@@ -20,62 +20,93 @@ import java.util.List;
 
 public class ProveedoresController {
 
+    // ===============================
+    //   TABLA Y COLUMNAS
+    // ===============================
+
     @FXML private TableView<Proveedor> tablaProveedores;
 
-    @FXML private TableColumn<Proveedor, Integer> colNumero;
-    @FXML private TableColumn<Proveedor, String>  colNombre;
-    @FXML private TableColumn<Proveedor, String>  colNombreEmpresa;
-    @FXML private TableColumn<Proveedor, String>  colTelefono;
-    @FXML private TableColumn<Proveedor, String>  colCorreo;
-    @FXML private TableColumn<Proveedor, String>  colDireccion;
-    @FXML private TableColumn<Proveedor, Void>    colAcciones;
+    @FXML private TableColumn<Proveedor, Integer> colNumero;          // Número consecutivo
+    @FXML private TableColumn<Proveedor, String>  colNombre;          // Nombre del contacto
+    @FXML private TableColumn<Proveedor, String>  colNombreEmpresa;   // Empresa
+    @FXML private TableColumn<Proveedor, String>  colTelefono;        // Teléfono
+    @FXML private TableColumn<Proveedor, String>  colCorreo;          // Correo
+    @FXML private TableColumn<Proveedor, String>  colDireccion;       // Dirección
+    @FXML private TableColumn<Proveedor, Void>    colAcciones;        // Editar / Eliminar
 
-    @FXML private TextField txtBuscar;
+    @FXML private TextField txtBuscar;                                // Buscador
 
     private final ObservableList<Proveedor> lista = FXCollections.observableArrayList();
     private final ProveedorDao dao = new ProveedorDao();
 
+
+    // ===============================
+    //   INICIALIZACIÓN
+    // ===============================
+
+    /**
+     * Se ejecuta al cargar la vista.
+     * Configura columnas, tamaño, botones dinámicos y llena la tabla.
+     */
     @FXML
     public void initialize() {
-        // Columna "No." (número consecutivo)
+
+        // Columna "No." (índice consecutivo empezando en 1)
         colNumero.setCellValueFactory(param ->
                 new ReadOnlyObjectWrapper<>(
                         tablaProveedores.getItems().indexOf(param.getValue()) + 1
                 )
         );
-        colNumero.setSortable(false);
+        colNumero.setSortable(false); // No tiene sentido ordenar esta columna
 
+        // Enlazar atributos del modelo
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colNombreEmpresa.setCellValueFactory(new PropertyValueFactory<>("nombreEmpresa"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 
-        // 🔹 Que la tabla reparta el ancho entre todas las columnas
+        // La tabla reparte el ancho automáticamente
         tablaProveedores.setColumnResizePolicy(
                 TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS
         );
 
-        // 🔹 Porcentajes aproximados de ancho (ajusta a tu gusto)
-        bindWidth(colNumero,        0.06);  // 6%
-        bindWidth(colNombre,        0.15);  // 16%
-        bindWidth(colNombreEmpresa, 0.20);  // 22%
-        bindWidth(colTelefono,      0.12);  // 12%
-        bindWidth(colCorreo,        0.17);  // 18%
-        bindWidth(colDireccion,     0.16);  // 16%
-        bindWidth(colAcciones,      0.14);  // 10%
+        // Porcentajes aproximados del ancho total
+        bindWidth(colNumero,        0.06);
+        bindWidth(colNombre,        0.15);
+        bindWidth(colNombreEmpresa, 0.20);
+        bindWidth(colTelefono,      0.12);
+        bindWidth(colCorreo,        0.17);
+        bindWidth(colDireccion,     0.16);
+        bindWidth(colAcciones,      0.14);
 
-        agregarBotonesAcciones();
-        cargarProveedores();
+        agregarBotonesAcciones(); // Agrega botones Editar / Eliminar
+        cargarProveedores();       // Llena la tabla
     }
 
-    /** Ajusta el ancho de la columna como porcentaje del ancho total de la tabla. */
+
+    // ===============================
+    //   AJUSTE DE TAMAÑO DE COLUMNAS
+    // ===============================
+
+    /**
+     * Ajusta el ancho de una columna basado en un porcentaje del ancho total.
+     */
     private void bindWidth(TableColumn<?, ?> col, double factor) {
         tablaProveedores.widthProperty().addListener((obs, oldW, newW) ->
                 col.setPrefWidth(newW.doubleValue() * factor)
         );
     }
 
+
+    // ===============================
+    //   CARGAR INFORMACIÓN
+    // ===============================
+
+    /**
+     * Obtiene todos los proveedores desde la base de datos y
+     * los agrega a la tabla.
+     */
     public void cargarProveedores() {
         lista.clear();
         List<Proveedor> proveedores = dao.obtenerTodos();
@@ -83,6 +114,14 @@ public class ProveedoresController {
         tablaProveedores.setItems(lista);
     }
 
+
+    // ===============================
+    //   BOTONES DE ACCIONES POR FILA
+    // ===============================
+
+    /**
+     * Agrega botones Editar y Eliminar dentro de cada fila de la tabla.
+     */
     private void agregarBotonesAcciones() {
         colAcciones.setCellFactory(col -> new TableCell<>() {
 
@@ -91,26 +130,29 @@ public class ProveedoresController {
             private final HBox contenedor    = new HBox(8, btnEditar, btnEliminar);
 
             {
-                // estilos a juego con productos
+                // Estilos visuales
                 btnEditar.setStyle("-fx-background-color: linear-gradient(to right, #547289, #696E6F); -fx-text-fill: white;");
                 btnEliminar.setStyle("-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;");
 
-                // Evitar botones miniatura
                 btnEditar.setMinWidth(70);
                 btnEliminar.setMinWidth(70);
 
                 contenedor.setAlignment(Pos.CENTER);
 
+                // Acción: abrir modal de edición
                 btnEditar.setOnAction(e -> {
                     Proveedor proveedor = getTableView().getItems().get(getIndex());
                     abrirEditar(proveedor);
                 });
 
+                // Acción: eliminar proveedor
                 btnEliminar.setOnAction(e -> {
                     Proveedor proveedor = getTableView().getItems().get(getIndex());
+
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmación");
                     alert.setHeaderText("Eliminar proveedor");
-                    alert.setContentText("¿Seguro que quieres eliminar a " + proveedor.getNombre() + "?");
+                    alert.setContentText("¿Seguro que deseas eliminar al proveedor:\n" + proveedor.getNombre() + "?");
 
                     alert.showAndWait().ifPresent(respuesta -> {
                         if (respuesta == ButtonType.OK) {
@@ -132,8 +174,14 @@ public class ProveedoresController {
         });
     }
 
-    // --- resto de tu código igual ---
 
+    // ===============================
+    //   MODALES PARA AGREGAR / EDITAR
+    // ===============================
+
+    /**
+     * Abre la ventana modal para agregar un proveedor nuevo.
+     */
     @FXML
     private void abrirAgregar() {
         try {
@@ -143,7 +191,7 @@ public class ProveedoresController {
             Parent root = loader.load();
 
             AgregarProveedorController ctrl = loader.getController();
-            ctrl.setProveedoresController(this);
+            ctrl.setProveedoresController(this); // Para refrescar tabla al guardar
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -156,6 +204,9 @@ public class ProveedoresController {
         }
     }
 
+    /**
+     * Abre el modal de agregar, pero cargando datos existentes.
+     */
     private void abrirEditar(Proveedor proveedor) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -178,6 +229,14 @@ public class ProveedoresController {
         }
     }
 
+
+    // ===============================
+    //   BUSCADOR DE PROVEEDORES
+    // ===============================
+
+    /**
+     * Filtra proveedores por nombre, empresa o correo.
+     */
     @FXML
     private void buscarProveedor() {
         String filtro = txtBuscar.getText() == null
@@ -195,12 +254,14 @@ public class ProveedoresController {
             if (p.getNombre().toLowerCase().contains(filtro) ||
                     p.getNombreEmpresa().toLowerCase().contains(filtro) ||
                     p.getCorreo().toLowerCase().contains(filtro)) {
+
                 filtrados.add(p);
             }
         }
 
         tablaProveedores.setItems(filtrados);
     }
+    //   MENSAJES DE ALERTA
 
     private void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

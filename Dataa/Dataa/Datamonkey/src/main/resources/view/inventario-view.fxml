@@ -37,17 +37,17 @@
        <HBox spacing="12">
       <children>
       
-              <Button onAction="#filtrarMateriaPrima" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Materia prima" />
+              <Button onAction="#filtrarMateriaPrima" style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-padding: 8 15; -fx-background-radius: 8;" text="Materia prima" />
       
-              <Button onAction="#filtrarInsumos" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Insumos" />
+              <Button onAction="#filtrarInsumos" style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-padding: 8 15; -fx-background-radius: 8;" text="Insumos" />
       
               <!-- Consumibles ELIMINADO -->
       
-              <Button onAction="#filtrarLimpieza" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Limpieza" />
+              <Button onAction="#filtrarLimpieza" style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-padding: 8 15; -fx-background-radius: 8;" text="Limpieza" />
       
-              <Button onAction="#filtrarMantenimiento" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Mantenimiento" />
+              <Button onAction="#filtrarMantenimiento" style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-padding: 8 15; -fx-background-radius: 8;" text="Mantenimiento" />
       
-              <Button onAction="#filtrarUniforme" style="-fx-background-color: #f5f5f5; -fx-padding: 8 15; -fx-background-radius: 8;" text="Uniforme" />
+              <Button onAction="#filtrarUniforme" style="-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-padding: 8 15; -fx-background-radius: 8;" text="Uniforme" />
       </children>
    
        </HBox>

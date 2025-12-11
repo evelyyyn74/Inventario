@@ -15,12 +15,25 @@ import java.sql.ResultSet;
 
 public class RegistroController {
 
-    @FXML private TextField txtNombre; // Solo visual, no se guarda en BD
-    @FXML private TextField txtUsuario;
+    // ===============================
+    //   CAMPOS DE LA INTERFAZ (FXML)
+    // ===============================
+
+    @FXML private TextField txtNombre;      // SOLO visual, NO se guarda en BD
+    @FXML private TextField txtUsuario;     // Usuario a registrar
     @FXML private PasswordField txtContrasena;
     @FXML private PasswordField txtConfirmar;
-    @FXML private Label lblMensaje;
+    @FXML private Label lblMensaje;         // Mensajes de error o éxito
 
+
+    // ===============================
+    //     BOTÓN: REGISTRAR USUARIO
+    // ===============================
+
+    /**
+     * Método ejecutado cuando se presiona el botón "Registrar".
+     * Realiza validaciones, verifica duplicados y finalmente inserta en BD.
+     */
     @FXML
     private void registrarUsuario() {
 
@@ -28,21 +41,26 @@ public class RegistroController {
         String pass1 = txtContrasena.getText().trim();
         String pass2 = txtConfirmar.getText().trim();
 
+        // ---- Validación de campos vacíos ---- //
         if (usuario.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
             lblMensaje.setText("⚠ Completa todos los campos.");
             lblMensaje.setTextFill(Color.RED);
             return;
         }
 
+        // ---- Validar que las contraseñas coincidan ---- //
         if (!pass1.equals(pass2)) {
             lblMensaje.setText("⚠ Las contraseñas no coinciden.");
             lblMensaje.setTextFill(Color.RED);
             return;
         }
 
+        // ===============================
+        //     CONEXIÓN A BASE DE DATOS
+        // ===============================
         try (Connection conn = DBConnection.getConnection()) {
 
-            // Verificar si existe
+            // ---- Verificar si el usuario ya existe ---- //
             String checkSql = "SELECT COUNT(*) FROM USUARIOS WHERE USUARIO = ?";
             PreparedStatement check = conn.prepareStatement(checkSql);
             check.setString(1, usuario);
@@ -54,18 +72,21 @@ public class RegistroController {
                 return;
             }
 
-            // INSERT CORRECTO SEGÚN TU TABLA
+            // ---- Insertar nuevo usuario ---- //
             String sql = "INSERT INTO USUARIOS (USUARIO, CONTRASENA, ROL) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
+
             ps.setString(1, usuario);
             ps.setString(2, pass1);
-            ps.setString(3, "ENCARGADO"); // Rol por defecto
+            ps.setString(3, "ENCARGADO"); // Rol predeterminado para nuevos usuarios
 
             ps.executeUpdate();
 
+            // ---- Mensaje de éxito ---- //
             lblMensaje.setText("✔ Usuario creado correctamente.");
             lblMensaje.setTextFill(Color.GREEN);
 
+            // Limpiar campos
             txtUsuario.clear();
             txtContrasena.clear();
             txtConfirmar.clear();
@@ -77,6 +98,15 @@ public class RegistroController {
         }
     }
 
+
+    // ===============================
+    //       VOLVER A LOGIN
+    // ===============================
+
+    /**
+     * Cierra la ventana de registro y regresa a la pantalla de Login.
+     * Útil cuando se abre desde el Dashboard (opción "Registro").
+     */
     @FXML
     private void volverAlLogin() {
         try {
@@ -85,7 +115,7 @@ public class RegistroController {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // Cerrar ventana actual (RegistrarUsuario dentro del Dashboard)
+            // Cerrar ventana actual
             Stage actual = (Stage) txtUsuario.getScene().getWindow();
             actual.close();
 

@@ -1,6 +1,5 @@
 package mx.edu.utez.datamonkey.dao;
 
-
 import mx.edu.utez.datamonkey.config.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +9,16 @@ import java.util.Map;
 
 public class EstadisticasDao {
 
+    // ============================================================
+    //   OBTENER STOCK POR CATEGORÍA (PARA PIE CHART)
+    // ============================================================
+
+    /**
+     * Consulta el total de stock agrupado por categoría.
+     * Esto se usa en la gráfica de pastel del Dashboard.
+     *
+     * @return Mapa con categoría como llave y total de stock como valor.
+     */
     public Map<String, Integer> stockPorCategoria() {
         Map<String, Integer> datos = new HashMap<>();
 
@@ -20,7 +29,10 @@ public class EstadisticasDao {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                datos.put(rs.getString("CATEGORIA"), rs.getInt("TOTAL_STOCK"));
+                datos.put(
+                        rs.getString("CATEGORIA"),
+                        rs.getInt("TOTAL_STOCK")
+                );
             }
 
         } catch (Exception e) {
@@ -30,15 +42,38 @@ public class EstadisticasDao {
         return datos;
     }
 
+
+    // ============================================================
+    //   PRODUCTOS DISPONIBLES Y AGOTADOS
+    // ============================================================
+
+    /**
+     * Cuenta los productos con stock mayor a 5,
+     * considerados disponibles.
+     */
     public int contarDisponibles() {
         return contar("SELECT COUNT(*) FROM PRODUCTOS WHERE STOCK > 5");
     }
 
-    // 🔹 AHORA cuenta productos agotados o por agotarse (<= 5)
+    /**
+     * Cuenta productos agotados o por agotarse,
+     * es decir, con stock menor o igual a 5.
+     */
     public int contarAgotados() {
         return contar("SELECT COUNT(*) FROM PRODUCTOS WHERE STOCK <= 5");
     }
 
+
+    // ============================================================
+    //   CALCULAR DINERO TOTAL DEL INVENTARIO
+    // ============================================================
+
+    /**
+     * Calcula el valor económico total del inventario:
+     * SUMA(PRECIO * STOCK).
+     *
+     * @return total en forma double.
+     */
     public double dineroTotal() {
         String sql = "SELECT SUM(PRECIO * STOCK) FROM PRODUCTOS";
 
@@ -46,7 +81,9 @@ public class EstadisticasDao {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
-            if (rs.next()) return rs.getDouble(1);
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,6 +92,14 @@ public class EstadisticasDao {
         return 0;
     }
 
+
+    // ============================================================
+    //   MÉTODO PRIVADO PARA CONTAR REGISTROS
+    // ============================================================
+
+    /**
+     * Método auxiliar reutilizable para consultas COUNT(*).
+     */
     private int contar(String sql) {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -62,12 +107,24 @@ public class EstadisticasDao {
 
             if (rs.next()) return rs.getInt(1);
 
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return 0;
     }
 
-    // 🔹 Lista de productos por agotarse (stock <= 5)
+
+    // ============================================================
+    //   LISTA DE PRODUCTOS POR AGOTARSE
+    // ============================================================
+
+    /**
+     * Obtiene una lista de los nombres de productos cuyo stock es
+     * menor o igual a 5. Se usa para mostrar advertencias en el Dashboard.
+     *
+     * @return lista de nombres de productos en riesgo.
+     */
     public List<String> productosPorAgotarse() {
         List<String> lista = new ArrayList<>();
 
@@ -88,4 +145,3 @@ public class EstadisticasDao {
         return lista;
     }
 }
-

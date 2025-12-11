@@ -18,6 +18,9 @@ import java.util.List;
 
 public class ProductosController {
 
+
+    //   TABLA Y COLUMNAS
+
     @FXML private TableView<Producto> tablaProductos;
 
     @FXML private TableColumn<Producto, Integer> colId;
@@ -30,13 +33,20 @@ public class ProductosController {
     @FXML private TableColumn<Producto, String> colEstado;
     @FXML private TableColumn<Producto, Void> colAcciones;
 
-    private final ProductoDao dao = new ProductoDao();
-    private final ObservableList<Producto> lista = FXCollections.observableArrayList();
+    private final ProductoDao dao = new ProductoDao(); // Acceso a la BD
+    private final ObservableList<Producto> lista = FXCollections.observableArrayList(); // Lista observable para la tabla
 
 
+    //   INICIALIZACIÓN DE LA VISTA
+
+    /**
+     * Configura columnas, ajusta anchos, agrega botones y carga los productos
+     * cuando se abre la vista.
+     */
     @FXML
     public void initialize() {
 
+        // Enlazar cada columna con el atributo correspondiente de Producto
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
@@ -46,28 +56,29 @@ public class ProductosController {
         colProveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
-        // 🔹 La tabla reparte el ancho entre las columnas
-        tablaProductos.setColumnResizePolicy(
-                TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS
-        );
+        // La tabla reparte el ancho automáticamente entre columnas
+        tablaProductos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
-        // 🔹 Ancho proporcional por columna (ajusta a tu gusto)
-        bindWidth(colId,        0.05);  // 5%
-        bindWidth(colNombre,    0.18);  // 18%
-        bindWidth(colCategoria, 0.12);  // 14%
-        bindWidth(colStock,     0.08);  // 8%
-        bindWidth(colMedida,    0.08);  // 8%
-        bindWidth(colPrecio,    0.10);  // 10%
-        bindWidth(colProveedor, 0.18);  // 18%
-        bindWidth(colEstado,    0.06);  // 7%
-        bindWidth(colAcciones,  0.15);  // 12%
+        // Porcentajes del ancho total asignados a cada columna
+        bindWidth(colId,        0.05);
+        bindWidth(colNombre,    0.18);
+        bindWidth(colCategoria, 0.12);
+        bindWidth(colStock,     0.08);
+        bindWidth(colMedida,    0.08);
+        bindWidth(colPrecio,    0.10);
+        bindWidth(colProveedor, 0.18);
+        bindWidth(colEstado,    0.06);
+        bindWidth(colAcciones,  0.15);
 
-        agregarBotonesAcciones();
-        cargarProductos();
+        agregarBotonesAcciones(); // Editar / Eliminar
+        cargarProductos();        // Listar productos
     }
 
+
+    //   AJUSTE DE ANCHO POR PORCENTAJE
+
     /**
-     * Ajusta el ancho de la columna como porcentaje del ancho total de la tabla.
+     * Ajusta el ancho de una columna según un factor proporcional.
      */
     private void bindWidth(TableColumn<?, ?> col, double factor) {
         tablaProductos.widthProperty().addListener((obs, oldW, newW) -> {
@@ -75,7 +86,11 @@ public class ProductosController {
         });
     }
 
+    //   CARGAR PRODUCTOS DESDE BD
 
+    /**
+     * Limpia y vuelve a cargar todos los productos desde la base de datos.
+     */
     public void cargarProductos() {
         lista.clear();
         List<Producto> productos = dao.obtenerTodos();
@@ -83,6 +98,11 @@ public class ProductosController {
         tablaProductos.setItems(lista);
     }
 
+    //   BOTONES POR FILA (EDITAR / ELIMINAR)
+
+    /**
+     * Agrega los botones Editar y Eliminar en cada fila de la tabla.
+     */
     private void agregarBotonesAcciones() {
         colAcciones.setCellFactory(col -> new TableCell<>() {
 
@@ -91,23 +111,25 @@ public class ProductosController {
             private final HBox contenedor = new HBox(8, btnEditar, btnEliminar);
 
             {
+                // Estilos visuales de los botones
                 btnEditar.setStyle("-fx-background-color: linear-gradient(to right, #547289, #696E6F); -fx-text-fill: white;");
                 btnEliminar.setStyle("-fx-background-color: linear-gradient(to right, #1d6fb8, #68a3c2); -fx-text-fill: white;");
 
-                // tamaños mínimos para que se lea el texto
                 btnEditar.setMinWidth(70);
                 btnEliminar.setMinWidth(70);
 
                 contenedor.setAlignment(javafx.geometry.Pos.CENTER);
 
+                // Acción: abrir modal para editar
                 btnEditar.setOnAction(e -> {
                     Producto producto = getTableView().getItems().get(getIndex());
                     abrirEditar(producto);
                 });
 
+                // Acción: eliminar producto
                 btnEliminar.setOnAction(e -> {
                     Producto producto = getTableView().getItems().get(getIndex());
-                    eliminar(producto.getId());
+                    eliminar(producto);
                 });
             }
 
@@ -119,6 +141,11 @@ public class ProductosController {
         });
     }
 
+    //   AGREGAR NUEVO PRODUCTO
+
+    /**
+     * Abre un modal para registrar un nuevo producto.
+     */
     @FXML
     private void abrirAgregar() {
         try {
@@ -126,7 +153,7 @@ public class ProductosController {
             Parent root = loader.load();
 
             AgregarProductoController ctrl = loader.getController();
-            ctrl.setProductosController(this);
+            ctrl.setProductosController(this); // Permite refrescar la tabla al guardar
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -139,6 +166,11 @@ public class ProductosController {
         }
     }
 
+    //   EDITAR PRODUCTO
+
+    /**
+     * Abre el formulario de agregar pero con datos precargados.
+     */
     private void abrirEditar(Producto producto) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/agregar-producto-view.fxml"));
@@ -146,7 +178,7 @@ public class ProductosController {
 
             AgregarProductoController ctrl = loader.getController();
             ctrl.setProductosController(this);
-            ctrl.cargarProducto(producto);
+            ctrl.cargarProducto(producto); // Se envían los datos a editar
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -159,24 +191,59 @@ public class ProductosController {
         }
     }
 
-    private void eliminar(int id) {
-        if (dao.eliminar(id)) {
-            cargarProductos();
-            mostrarAlerta("Producto eliminado correctamente");
+
+    //   ELIMINAR PRODUCTO
+
+    /**
+     * Valida stock, confirma y elimina un producto si su stock es 0.
+     */
+    private void eliminar(Producto producto) {
+
+        // No permitir eliminar si tiene stock disponible
+        if (producto.getStock() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("No se puede eliminar");
+            alert.setContentText("Este producto aún tiene stock disponible. "
+                    + "Para eliminarlo, su stock debe ser igual a 0.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Confirmación del usuario
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setHeaderText("Confirmar eliminación");
+        confirm.setContentText("¿Deseas eliminar el producto \"" + producto.getNombre() + "\"?");
+
+        if (confirm.showAndWait().get() != ButtonType.OK) {
+            return;
+        }
+
+        // Intentar eliminar en BD
+        if (dao.eliminar(producto.getId())) {
+
+            cargarProductos(); // Refrescar tabla
+
+            Alert ok = new Alert(Alert.AlertType.INFORMATION);
+            ok.setHeaderText("✔ Producto eliminado");
+            ok.setContentText("El producto fue eliminado correctamente.");
+            ok.showAndWait();
+
         } else {
-            mostrarAlerta("No se pudo eliminar el producto");
+
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("Error");
+            error.setContentText("Ocurrió un error al intentar eliminar el producto.");
+            error.showAndWait();
         }
     }
 
-    private void mostrarAlerta(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
+    //   BUSCADOR DE PRODUCTOS
 
     @FXML private TextField txtBuscar;
 
+    /**
+     * Busca productos por nombre, categoría o proveedor.
+     */
     @FXML
     private void buscarProducto() {
         String filtro = txtBuscar.getText() == null ? "" : txtBuscar.getText().trim().toLowerCase();
@@ -192,12 +259,12 @@ public class ProductosController {
             if (p.getNombre().toLowerCase().contains(filtro) ||
                     p.getCategoria().toLowerCase().contains(filtro) ||
                     p.getProveedor().toLowerCase().contains(filtro)) {
+
                 filtrados.add(p);
             }
         }
 
         tablaProductos.setItems(filtrados);
     }
-
 
 }
